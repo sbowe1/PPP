@@ -1,0 +1,23 @@
+# TODO
+- Create the following classes:
+  - User Class
+    - Variables: UserID, UserName, Password
+    - Functions: Getters & Setters for variables, ToString
+  - Song Class
+    - Variables: SongID, SongName, Metadata (Artist, Album, Last Played)
+    - Functions: Getters & Setters for variables, ToString
+  - SongDAO Class
+- Add database functionality in PppApplication.java
+- User Stories:
+  - Select all songs from the songs table
+  - Select one song by its ID
+  - Select all songs that belong to a certain user (find by user id FK)
+  - Insert a new song into the songs table
+  - Insert a new user into the users table
+  - Update a user
+  - Delete a song
+  - Extra Functionality (At least one of the following):
+    - Sort by listening time of specific user (listening history)
+    - Sort by listening time of any user (global listening history)
+    - Return resultSets of specific metadata (Album, Artist, Genre)
+    - (INSERT MORE FUNCTIONALITY IDEAS HERE IF APPLICABLE)
