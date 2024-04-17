@@ -6,8 +6,14 @@
   - Song Class
     - Variables: SongID, SongName, Metadata (Artist, Album, Last Played)
     - Functions: Getters & Setters for variables, ToString
+  - UserDAO Class
   - SongDAO Class
-- Add database functionality in PppApplication.java
+  - UserController Class
+  - SongController Class
+- Add database functionality in:
+  - DAO classes
+  - Controller classes
+  - `PppApplication.java`
 - User Stories:
   - Select all songs from the songs table
   - Select one song by its ID
