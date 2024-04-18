@@ -1,12 +1,27 @@
 package com.revature.models;
 
+import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
+
 import java.lang.String;
 
+@Entity
+@Table(name="songs")
+@Component
 class Song{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int songId;
 
-	private int songId; 
-	private String songName, songArtist, songAlbum;
+	@Column(nullable = false)
+	private String songName;
 
+	@Column(nullable = false)
+	private String songArtist;
+
+	private String songAlbum;
+
+	//Constructors
 	public Song(){
 	}
 
@@ -17,6 +32,7 @@ class Song{
 		this.songAlbum = songAlbum;
 	}
 
+	//Getters and Setters
 	public int getSongID() { return songId; }
 
 	public String getSongName() { return songName; }
@@ -33,6 +49,7 @@ class Song{
 
 	public void setSongAlbum(String songAlbum) { this.songAlbum = songAlbum; }
 
+	//Custom toString
 	public String toString() { return songArtist + " - " + songName; }
 
 }
