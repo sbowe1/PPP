@@ -1,33 +1,76 @@
-package com.revature;
+package com.revature.models;
 
-import java.lang.String;
+import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
-class User{
+@Entity
+@Table(name="users")
+@Component
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
 
-	private int userID; 
-	private String userName, password;
+    @Column(nullable = false)
+    private String firstName;
 
-	public User(){
-	}
+    @Column(nullable = false)
+    private String lastName;
 
-	public User(int userID, String userName, String password){
-		this.userID = userID;
-		this.userName = userName;
-		this.password = password;
-	}
+    private int age;
 
-	public int getUserID() { return userID; }
+    //Constructors
+    public User() {
+    }
 
-	public String getUserName() { return userName; }
+    public User(int userId, String firstName, String lastName, int age) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
 
-	public String getPassword() { return password; }
+    //Getters and Setters
+    public int getUserId() {
+        return userId;
+    }
 
-	public void setUserID(int userID) { this.userID = userID; }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public void setUserName(String userName) { this.userName = userName; }
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setPassword(String password) { this.password = password; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String toString() { return userName; }
+    public String getLastName() {
+        return lastName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    //toString
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
