@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.models;
 
 import java.lang.String;
 
