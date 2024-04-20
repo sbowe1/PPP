@@ -17,18 +17,24 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
+    private String username;
+
     private int age;
 
     //Constructors
     public User() {
     }
 
-    public User(int userId, String firstName, String lastName, int age) {
+    public User(int userId, String firstName, String lastName, String username, int age) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.age = age;
     }
+
+
 
     //Getters and Setters
     public int getUserId() {
@@ -55,6 +61,9 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getUsername() { return username; }
+
+    public void setUsername(String username) { this.username = username; }
     public int getAge() {
         return age;
     }
@@ -64,12 +73,14 @@ public class User {
     }
 
     //toString
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
                 ", age=" + age +
                 '}';
     }
