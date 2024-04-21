@@ -1,10 +1,10 @@
 # TODO
 - Create the following classes:
   - User Class
-    - Variables: UserID, UserName, Password
+    - Variables: UserID, FirstName, LastName, Username, Age
     - Functions: Getters & Setters for variables, ToString
   - Song Class
-    - Variables: SongID, SongName, Metadata (Artist, Album, Last Played)
+    - Variables: SongID, SongName, Metadata (Artist, Album, Last Played), Associated User
     - Functions: Getters & Setters for variables, ToString
   - UserDAO Class
   - SongDAO Class

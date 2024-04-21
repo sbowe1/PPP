@@ -28,7 +28,18 @@ public class UserController {
 
     // Update an existing User
     @PatchMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable int userId, @RequestBody String username){
+    public ResponseEntity<Object> updateUser(@PathVariable int userId, @RequestBody String username){
         Optional<User> u = userDAO.findById(userId);
+
+        if(u.isEmpty()){
+            return ResponseEntity.status(404).body("No user found with ID " + userId);
+        }
+
+        // extracting the User and updating the username
+        User user = u.get();
+        user.setUsername(username);
+        userDAO.save(user);
+
+        return ResponseEntity.accepted().body(user);
     }
 }
