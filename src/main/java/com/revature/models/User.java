@@ -34,8 +34,6 @@ public class User {
         this.age = age;
     }
 
-
-
     //Getters and Setters
     public int getUserId() {
         return userId;

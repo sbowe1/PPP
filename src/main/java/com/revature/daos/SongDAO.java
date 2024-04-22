@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface SongDAO extends JpaRepository<Song, Integer>{
+	
     // Defining a new method that finds all songs by userId
     public Optional<List<Song>> findAllByUserId(int userId);
 }

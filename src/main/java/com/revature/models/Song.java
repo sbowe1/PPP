@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name="songs")
 @Component
 public class Song{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int songId;
