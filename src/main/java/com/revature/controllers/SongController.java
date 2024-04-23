@@ -5,16 +5,10 @@ import com.revature.daos.UserDAO;
 import com.revature.models.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
 import com.revature.models.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,4 +88,97 @@ public class SongController {
 
 		return ResponseEntity.accepted().body("The following track has been deleted: " + song.getSongArtist() + " - " + song.getSongName() + ".");
 	}
+
+	//Extra Functionality
+
+	// Update Methods for each property of a Song
+
+	//Update Song Name
+    @PatchMapping("/{songId}")
+    public ResponseEntity<Object> updateSongName(@PathVariable int songId, @RequestBody String newSongName){
+        Optional<Song> s = songDAO.findById(songId);
+
+        if(s.isEmpty()){
+            return ResponseEntity.status(404).body("No track with an id of ' " + songId + "' found.");
+        }
+
+        Song song = s.get();
+        song.setSongName(newSongName);
+        songDAO.save(song);
+
+        return ResponseEntity.accepted().body(song);
+    }
+
+	//Update Song Artist
+    @PatchMapping("/{songId}")
+    public ResponseEntity<Object> updateSongArtist(@PathVariable int songId, @RequestBody String newArtistName){
+        Optional<Song> s = songDAO.findById(songId);
+
+        if(s.isEmpty()){
+            return ResponseEntity.status(404).body("No track with an id of ' " + songId + "' found.");
+        }
+
+        Song song = s.get();
+        song.setSongArtist(newArtistName);
+        songDAO.save(song);
+
+        return ResponseEntity.accepted().body(song);
+    }
+
+	//Update Song Album
+    @PatchMapping("/{songId}")
+    public ResponseEntity<Object> updateSongAlbum(@PathVariable int songId, @RequestBody String newAlbumName){
+        Optional<Song> s = songDAO.findById(songId);
+
+        if(s.isEmpty()){
+            return ResponseEntity.status(404).body("No track with an id of ' " + songId + "' found.");
+        }
+
+        // extracting the User and updating the username
+        Song song = s.get();
+        song.setSongAlbum(newAlbumName);
+        songDAO.save(song);
+
+        return ResponseEntity.accepted().body(song);
+    }
+
+	//Update Last Played Date
+    @PatchMapping("/{songId}")
+    public ResponseEntity<Object> updateLastPlayed(@PathVariable int songId, @RequestBody LocalDateTime newDate){
+        Optional<Song> s = songDAO.findById(songId);
+
+        if(s.isEmpty()){
+            return ResponseEntity.status(404).body("No track with an id of ' " + songId + "' found.");
+        }
+
+        Song song = s.get();
+        song.setLastPlayed(newDate);
+        songDAO.save(song);
+
+        return ResponseEntity.accepted().body(song);
+    }	
+
+	//Update playCount
+    @PatchMapping("/{songId}")
+    public ResponseEntity<Object> updatePlayCount(@PathVariable int songId){
+        Optional<Song> s = songDAO.findById(songId);
+
+        if(s.isEmpty()){
+            return ResponseEntity.status(404).body("No track with an id of ' " + songId + "' found.");
+        }
+
+        Song song = s.get();
+        song.incPlayCount();
+        songDAO.save(song);
+
+        return ResponseEntity.accepted().body(song);
+    }	
+
+	//Business Logic-Like Function: Play Song
+	public void playSong(@PathVariable int songId){
+		updateLastPlayed(songId, LocalDateTime.now());
+		updatePlayCount(songId);		
+	}	
+
+
 }

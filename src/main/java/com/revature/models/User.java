@@ -20,18 +20,15 @@ public class User {
     @Column(nullable = false)
     private String username;
 
-    private int age;
-
     //Constructors
     public User() {
     }
 
-    public User(int userId, String firstName, String lastName, String username, int age) {
+    public User(int userId, String firstName, String lastName, String username) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        this.age = age;
     }
 
     //Getters and Setters
@@ -63,14 +60,6 @@ public class User {
 
     public void setUsername(String username) { this.username = username; }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     //toString
 
     @Override
@@ -80,7 +69,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
-                ", age=" + age +
                 '}';
     }
 }

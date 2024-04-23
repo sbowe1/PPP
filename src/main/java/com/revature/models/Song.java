@@ -22,9 +22,13 @@ public class Song{
 	@Column(nullable = false)
 	private String songArtist;
 
+	@Column
 	private String songAlbum;
 
-	@CreationTimestamp
+	@Column
+	private int playCount;
+
+	@Column
 	private LocalDateTime lastPlayed;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -35,12 +39,13 @@ public class Song{
 	public Song(){
 	}
 
-	public Song(int songID, String songName, String songArtist, String songAlbum, LocalDateTime lastPlayed, User user){
+	public Song(int songID, String songName, String songArtist, String songAlbum, User user){
 		this.songId = songID;
 		this.songName = songName;
 		this.songArtist = songArtist;
 		this.songAlbum = songAlbum;
-		this.lastPlayed = lastPlayed;
+		this.lastPlayed = null; //If a song is added to the database, it has never been played before, so this value should be null.
+		this.playCount = 0; // Same as lastPlayed
 		this.user = user;
 	}
 
@@ -53,6 +58,8 @@ public class Song{
 
 	public String getSongAlbum() { return songAlbum; }
 
+	public int getPlayCount() { return playCount; }
+
 	public LocalDateTime getLastPlayed() { return lastPlayed; }
 
 	public User getUser() { return user; }
@@ -64,6 +71,8 @@ public class Song{
 	public void setSongArtist(String songArtist) { this.songArtist = songArtist; }
 
 	public void setSongAlbum(String songAlbum) { this.songAlbum = songAlbum; }
+
+	public void incPlayCount() { this.playCount++; }
 
 	public void setLastPlayed(LocalDateTime lastPlayed) { this.lastPlayed = lastPlayed; }
 
