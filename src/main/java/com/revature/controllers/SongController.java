@@ -177,7 +177,7 @@ public class SongController {
     }	
 
 	//set playCount
-    @PatchMapping("/{songId}")
+    @PatchMapping("/{songId}/new")
     public ResponseEntity<Object> setPlayCount(@PathVariable int songId, @RequestBody int newPlayCount){
         Optional<Song> s = songDAO.findById(songId);
 

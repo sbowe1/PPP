@@ -27,7 +27,7 @@ public class UserController {
     }
 
     // Update an existing User
-    @PatchMapping("/{userId}/new")
+    @PatchMapping("/{userId}")
     public ResponseEntity<Object> updateUser(@PathVariable int userId, @RequestBody String username){
         Optional<User> u = userDAO.findById(userId);
 
