@@ -49,15 +49,18 @@ public class SongController {
     // Select all songs played by a user
     @GetMapping("/{userId}")
     public ResponseEntity<Object> getAllSongsByUserId(@PathVariable int userId){
-        Optional<List<Song>> songList = songDAO.findAllByUserId(userId);
-
-        if(songList.isEmpty()){
-            return ResponseEntity.status(404).body("No songs found with user ID " + userId);
+        Optional<User> u = userDAO.findById(userId);
+        if(u.isEmpty()){
+            return ResponseEntity.status(404).body("No user found with user ID " + userId);
         }
 
-        List<Song> songs = songList.get();
+        Optional<List<Song>> songs = songDAO.findAllByUser(u.get());
 
-        return ResponseEntity.ok(songs);
+        if(songs.isEmpty()){
+            return ResponseEntity.status(404).body("User " + userId + " has not listened to any songs");
+        }
+
+        return ResponseEntity.ok(songs.get());
     }
 
 	//Insert a new song into song table
@@ -94,7 +97,7 @@ public class SongController {
 	// Update Methods for each property of a Song
 
 	//Update Song Name
-    @PatchMapping("/{songId}")
+    @PatchMapping("/{songId}/name")
     public ResponseEntity<Object> updateSongName(@PathVariable int songId, @RequestBody String newSongName){
         Optional<Song> s = songDAO.findById(songId);
 
@@ -110,7 +113,7 @@ public class SongController {
     }
 
 	//Update Song Artist
-    @PatchMapping("/{songId}")
+    @PatchMapping("/{songId}/artist")
     public ResponseEntity<Object> updateSongArtist(@PathVariable int songId, @RequestBody String newArtistName){
         Optional<Song> s = songDAO.findById(songId);
 
@@ -126,7 +129,7 @@ public class SongController {
     }
 
 	//Update Song Album
-    @PatchMapping("/{songId}")
+    @PatchMapping("/{songId}/album")
     public ResponseEntity<Object> updateSongAlbum(@PathVariable int songId, @RequestBody String newAlbumName){
         Optional<Song> s = songDAO.findById(songId);
 
@@ -142,7 +145,7 @@ public class SongController {
     }
 
 	//Update Last Played Date
-    @PatchMapping("/{songId}")
+    @PatchMapping("/{songId}/last-played")
     public ResponseEntity<Object> updateLastPlayed(@PathVariable int songId, @RequestBody LocalDateTime newDate){
         Optional<Song> s = songDAO.findById(songId);
 
@@ -158,7 +161,7 @@ public class SongController {
     }	
 
 	//increment playCount
-    @PatchMapping("/{songId}")
+    @PatchMapping("/{songId}/play-count")
     public ResponseEntity<Object> incrementPlayCount(@PathVariable int songId){
         Optional<Song> s = songDAO.findById(songId);
 

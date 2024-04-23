@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.domain.*;
 
 @SpringBootApplication
 @EnableJpaRepositories("com.revature.daos")
-@ComponentScan("come.revature")
-@EntityScan("com.revature.daos")
+@ComponentScan("com.revature")
+@EntityScan("com.revature.models")
 public class PppApplication {
 
 	public static void main(String[] args) {
