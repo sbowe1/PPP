@@ -33,7 +33,7 @@ public class SongController {
     }
 
     // Select one song by ID
-    @GetMapping("/{songId}")
+    @GetMapping("/song/{songId}")
     public ResponseEntity<Object> getSongById(@PathVariable int songId){
         Optional<Song> s = songDAO.findById(songId);
 
@@ -47,7 +47,7 @@ public class SongController {
     }
 
     // Select all songs played by a user
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<Object> getAllSongsByUserId(@PathVariable int userId){
         Optional<User> u = userDAO.findById(userId);
         if(u.isEmpty()){
@@ -64,7 +64,7 @@ public class SongController {
     }
 
 	//Insert a new song into song table
-	@PostMapping("/{userid}")
+	@PostMapping("/{userId}")
 	public ResponseEntity<Song> insertSong(@RequestBody Song song, @PathVariable int userId){
 		User u = userDAO.findById(userId).get();
 
@@ -76,7 +76,7 @@ public class SongController {
 	}
 
 	//Delete a song from the song table
-	@DeleteMapping("/{songid}")
+	@DeleteMapping("/{songID}")
 	public ResponseEntity<Object> deleteSong(@PathVariable int songID){
 
 		Optional<Song> s = songDAO.findById(songID);
@@ -146,7 +146,7 @@ public class SongController {
 
 	//Update Last Played Date
     @PatchMapping("/{songId}/last-played")
-    public ResponseEntity<Object> updateLastPlayed(@PathVariable int songId, @RequestBody LocalDateTime newDate){
+    public ResponseEntity<Object> updateLastPlayed(@PathVariable int songId){
         Optional<Song> s = songDAO.findById(songId);
 
         if(s.isEmpty()){
@@ -154,7 +154,7 @@ public class SongController {
         }
 
         Song song = s.get();
-        song.setLastPlayed(newDate);
+        song.setLastPlayed(LocalDateTime.now());
         songDAO.save(song);
 
         return ResponseEntity.accepted().body(song);
