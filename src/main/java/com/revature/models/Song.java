@@ -39,6 +39,7 @@ public class Song{
 	public Song(){
 	}
 
+	//basic constructor for general use
 	public Song(int songID, String songName, String songArtist, String songAlbum, User user){
 		this.songId = songID;
 		this.songName = songName;
@@ -46,6 +47,17 @@ public class Song{
 		this.songAlbum = songAlbum;
 		this.lastPlayed = null; //If a song is added to the database, it has never been played before, so this value should be null.
 		this.playCount = 0; // Same as lastPlayed
+		this.user = user;
+	}
+
+	//adv. constructor for admin work
+	public Song(int songID, String songName, String songArtist, String songAlbum, LocalDateTime localDateTime, int playCount, User user){
+		this.songId = songID;
+		this.songName = songName;
+		this.songArtist = songArtist;
+		this.songAlbum = songAlbum;
+		this.lastPlayed = localDateTime;
+		this.playCount = playCount;
 		this.user = user;
 	}
 
@@ -73,6 +85,8 @@ public class Song{
 	public void setSongAlbum(String songAlbum) { this.songAlbum = songAlbum; }
 
 	public void incPlayCount() { this.playCount++; }
+
+	public void setPlayCount(int playCount) { this.playCount = playCount; }
 
 	public void setLastPlayed(LocalDateTime lastPlayed) { this.lastPlayed = lastPlayed; }
 

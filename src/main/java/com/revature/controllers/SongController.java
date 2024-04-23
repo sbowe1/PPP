@@ -158,9 +158,9 @@ public class SongController {
         return ResponseEntity.accepted().body(song);
     }	
 
-	//Update playCount
+	//increment playCount
     @PatchMapping("/{songId}")
-    public ResponseEntity<Object> updatePlayCount(@PathVariable int songId){
+    public ResponseEntity<Object> incrementPlayCount(@PathVariable int songId){
         Optional<Song> s = songDAO.findById(songId);
 
         if(s.isEmpty()){
@@ -174,11 +174,27 @@ public class SongController {
         return ResponseEntity.accepted().body(song);
     }	
 
+	//set playCount
+    @PatchMapping("/{songId}")
+    public ResponseEntity<Object> setPlayCount(@PathVariable int songId, @RequestBody int newPlayCount){
+        Optional<Song> s = songDAO.findById(songId);
+
+        if(s.isEmpty()){
+            return ResponseEntity.status(404).body("No track with an id of ' " + songId + "' found.");
+        }
+
+        Song song = s.get();
+        song.setPlayCount(newPlayCount);
+        songDAO.save(song);
+
+        return ResponseEntity.accepted().body(song);
+    }	
+
 	//Business Logic-Like Function: Play Song
-	public void playSong(@PathVariable int songId){
-		updateLastPlayed(songId, LocalDateTime.now());
-		updatePlayCount(songId);		
-	}	
+	//public void playSong(@PathVariable int songId){
+	//	updateLastPlayed(songId, LocalDateTime.now());
+	//	updatePlayCount(songId);		
+	//}	
 
 
 }
