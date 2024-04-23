@@ -134,7 +134,6 @@ public class SongController {
             return ResponseEntity.status(404).body("No track with an id of ' " + songId + "' found.");
         }
 
-        // extracting the User and updating the username
         Song song = s.get();
         song.setSongAlbum(newAlbumName);
         songDAO.save(song);
